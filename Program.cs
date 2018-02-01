@@ -59,7 +59,8 @@ namespace SIAOD
             string filepath = @"C:\Users\USER\Documents\Visual Studio 2015\Projects\SIAOD\SIAOD\population1.csv";
             if ((!File.Exists(filepath)))
                 Console.WriteLine("File is error");
-            int count = System.IO.File.ReadAllLines(filepath).Length;
+            int count = (System.IO.File.ReadAllLines(filepath).Length)-10000;
+    
             Population[] population = new Population[count];
             char separator = ';';
             using (StreamReader reader = File.OpenText(filepath))
@@ -75,7 +76,10 @@ namespace SIAOD
                 }
             }
             SortSelectandPrint sort = new SortSelectandPrint();
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             sort.SortSelection(population);
+            watch.Stop();
+            Console.WriteLine("Выполнение сортировки заняло: {0}",watch.Elapsed.TotalSeconds);
             Console.ReadKey();
         }
        
